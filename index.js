@@ -27,7 +27,7 @@ const referralValidation = [
 ];
 
 app.get('/test', (req, res, next) => {
-  console.log("its console ");
+  console.log("its console.. ",process.env.EMAIL);
   res.send("Its a get end point---");
 });
 
