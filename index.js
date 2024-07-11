@@ -40,7 +40,7 @@ app.post('/api/referrals', referralValidation, async (req, res, next) => {
   }
 
   const { referrerName, referrerEmail, refereeName, refereeEmail } = req.body;
-  
+  console.log(req.body);
   try {
     // Save referral data to the database
     const referral = await prisma.referral.create({
