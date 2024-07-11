@@ -27,7 +27,7 @@ const referralValidation = [
 ];
 
 app.get('/test', (req, res, next) => {
-  console.log("its console.. ",process.env.EMAIL);
+  console.log("its console.. ", process.env.EMAIL);
   res.send("Its a get end point---");
 });
 
@@ -38,10 +38,11 @@ app.post('/postreq', (req, res, next) => {
 // Endpoint to save referral data
 app.post('/referrals', referralValidation, async (req, res, next) => {
   console.log("in post");
-  //const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return res.status(400).json({ errors: errors.array() });
-  // }
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   const { referrerName, referrerEmail, refereeName, refereeEmail } = req.body;
   console.log(req.body);
@@ -83,10 +84,10 @@ app.post('/referrals', referralValidation, async (req, res, next) => {
 });
 
 // Error handling middleware
-// app.use((err, req, res, next) => {
-//   console.error('Unhandled error:', err);
-//   res.status(500).json({ error: 'Internal server error.' });
-// });
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: 'Internal server errorr.' });
+});
 
 // Start the server
 const PORT = 3005;
