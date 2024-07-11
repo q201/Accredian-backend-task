@@ -33,7 +33,7 @@ app.get('/test', (req, res, next) => {
 
 app.post('/postreq', (req, res, next) => {
   console.log("its console.. ",process.env.PORT);
-  res.send("Post request!!!");
+  res.json(req.body);
 });
 
 // Endpoint to save referral data
