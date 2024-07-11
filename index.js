@@ -30,7 +30,7 @@ app.get('/test', (req, res, next) => {
   console.log("its console ");
   res.send("Its a get end point---");
 });
-
+app.post('/postreq',(req,res,next)=>{return "post request!!!"});
 // Endpoint to save referral data
 app.post('/api/referrals',  async (req, res, next) => {
 console.log("in post");
