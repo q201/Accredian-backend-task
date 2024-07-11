@@ -36,7 +36,7 @@ app.post('/postreq', (req, res, next) => {
 });
 
 // Endpoint to save referral data
-app.post('/api/referrals', referralValidation, async (req, res, next) => {
+app.post('/referrals', referralValidation, async (req, res, next) => {
   console.log("in post");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
