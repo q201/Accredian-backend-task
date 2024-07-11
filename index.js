@@ -33,7 +33,7 @@ app.get('/test', (req, res, next) => {
 
 // Endpoint to save referral data
 app.post('/api/referrals',  async (req, res, next) => {
-
+console.log("in post");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
