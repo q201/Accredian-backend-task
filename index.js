@@ -30,10 +30,14 @@ app.get('/test', (req, res, next) => {
   console.log("its console ");
   res.send("Its a get end point---");
 });
-app.post('/postreq',(req,res,next)=>{return "post request!!!"});
+
+app.post('/postreq', (req, res, next) => {
+  res.send("Post request!!!");
+});
+
 // Endpoint to save referral data
-app.post('/api/referrals',  async (req, res, next) => {
-console.log("in post");
+app.post('/api/referrals', referralValidation, async (req, res, next) => {
+  console.log("in post");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -70,22 +74,4 @@ console.log("in post");
         return res.status(500).json({ error: 'Failed to send referral email.' });
       }
       console.log('Email sent:', info.response);
-      res.status(201).json(referral);
-    });
-  } catch (error) {
-    console.error('Error saving referral:', error);
-    next(error);
-  }
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal server error.' });
-});
-
-// Start the server
-const PORT = process.env.PORT || 3005;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+     
