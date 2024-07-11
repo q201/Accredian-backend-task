@@ -27,6 +27,11 @@ const referralValidation = [
   body('refereeEmail').isEmail().withMessage('Invalid referee email.'),
 ];
 
+ app.get('test',(req,res,next)=>{
+
+        res.send("Its a get end point---")
+
+ });
 // Endpoint to save referral data
 app.post('/api/referrals', referralValidation, async (req, res, next) => {
   const errors = validationResult(req);
