@@ -27,7 +27,7 @@ const referralValidation = [
   body('refereeEmail').isEmail().withMessage('Invalid referee email.'),
 ];
 
- app.get('test',(req,res,next)=>{
+ app.get('/test',(req,res,next)=>{
 
         res.send("Its a get end point---")
 
