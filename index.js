@@ -74,4 +74,22 @@ app.post('/api/referrals', referralValidation, async (req, res, next) => {
         return res.status(500).json({ error: 'Failed to send referral email.' });
       }
       console.log('Email sent:', info.response);
-     
+      res.status(201).json(referral);
+    });
+  } catch (error) {
+    console.error('Error saving referral:', error);
+    next(error);
+  }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: 'Internal server error.' });
+});
+
+// Start the server
+const PORT = process.env.PORT || 3005;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
