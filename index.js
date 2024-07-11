@@ -80,7 +80,7 @@ app.post('/api/referrals', referralValidation, async (req, res, next) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal server error.' });
+  res.status(500).json({ error: 'Internal server errorr.' });
 });
 
 // Start the server
