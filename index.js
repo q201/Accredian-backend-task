@@ -11,7 +11,6 @@ app.use(cors());
 app.use(express.json());
 const prisma = new PrismaClient();
 
-
 const getISTTime = () => {
   const date = new Date();
   // Get the time in milliseconds and add IST offset (5.5 hours)
@@ -27,11 +26,11 @@ const referralValidation = [
   body('refereeEmail').isEmail().withMessage('Invalid referee email.'),
 ];
 
- app.get('/test',(req,res,next)=>{
-      console.log("its  console ");
-        res.send("Its a get end point---")
+app.get('/test', (req, res, next) => {
+  console.log("its console ");
+  res.send("Its a get end point---");
+});
 
- });
 // Endpoint to save referral data
 app.post('/api/referrals', referralValidation, async (req, res, next) => {
   const errors = validationResult(req);
@@ -41,6 +40,7 @@ app.post('/api/referrals', referralValidation, async (req, res, next) => {
 
   const { referrerName, referrerEmail, refereeName, refereeEmail } = req.body;
   console.log(req.body);
+
   try {
     // Save referral data to the database
     const referral = await prisma.referral.create({
@@ -80,7 +80,7 @@ app.post('/api/referrals', referralValidation, async (req, res, next) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal server errorr.' });
+  res.status(500).json({ error: 'Internal server error.' });
 });
 
 // Start the server
