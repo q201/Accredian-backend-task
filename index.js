@@ -39,9 +39,9 @@ app.post('/postreq', (req, res, next) => {
 app.post('/referrals', referralValidation, async (req, res, next) => {
   console.log("in post");
   //const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+  // if (!errors.isEmpty()) {
+  //   return res.status(400).json({ errors: errors.array() });
+  // }
 
   const { referrerName, referrerEmail, refereeName, refereeEmail } = req.body;
   console.log(req.body);
@@ -89,7 +89,7 @@ app.post('/referrals', referralValidation, async (req, res, next) => {
 // });
 
 // Start the server
-const PORT = process.env.PORT || 3005;
+const PORT = 3005;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
