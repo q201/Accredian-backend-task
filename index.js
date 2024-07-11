@@ -58,8 +58,8 @@ app.post('/refer', referralValidation, async (req, res, next) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD,
+        user: '202qasim202@gmail.com',
+        pass: "icef vinn vehm sowu",
       },
     });
 
