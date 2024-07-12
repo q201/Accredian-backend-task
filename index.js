@@ -26,19 +26,14 @@ const referralValidation = [
   body('refereeEmail').isEmail().withMessage('Invalid referee email.'),
 ];
 
-app.get('/test', (req, res, next) => {
+app.get('/getAll', (req, res, next) => {
   console.log("its console.. ", process.env.EMAIL);
   res.send("Its a get end point---");
 });
 
-app.post('/postreq', (req, res, next) => {
-  console.log("its console.. ",process.env.PORT);
-  res.json(req.body);
-});
-
+ 
 // Endpoint to save referral data
 app.post('/refer', referralValidation, async (req, res, next) => {
-  console.log("in post");
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -46,20 +41,19 @@ app.post('/refer', referralValidation, async (req, res, next) => {
   }
 
   const { referrerName, referrerEmail, refereeName, refereeEmail } = req.body;
-  console.log(req.body);
 
   try {
     // Save referral data to the database
     const referral = await prisma.referral.create({
       data: { referrerName, referrerEmail, refereeName, refereeEmail, createdAt: getISTTime() },
     });
-
+    console.log(referral);
     // Send referral email
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: '202qasim202@gmail.com',
-        pass: "icef vinn vehm sowu",
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
@@ -67,7 +61,7 @@ app.post('/refer', referralValidation, async (req, res, next) => {
       from: process.env.EMAIL,
       to: refereeEmail,
       subject: 'You have been referred to a course!',
-      text: `Hi ${refereeName},\n\n${referrerName} has referred you to a great course!\n\nBest regards,\nCourse Team`,
+      text: `Hi ${refereeName},\n\n${referrerName} has referred you to a great course!\n\nBest regards,\nCourse xyz Team`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -84,11 +78,11 @@ app.post('/refer', referralValidation, async (req, res, next) => {
   }
 });
 
-// Error handling middleware
-// app.use((err, req, res, next) => {
-//   console.error('Unhandled error:', err);
-//   res.status(500).json({ error: 'Internal server errorr.' });
-// });
+//Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: 'Internal server errorr.' });
+});
 
 // Start the server
 const PORT = process.env.PORT||3005;
