@@ -1,6 +1,6 @@
 datasource db {
   provider = "mysql"
-  url      = "mysql://avnadmin:AVNS_I9xn8ax55ABtc_cXJAJ@mysql123-qasim202-0b29.i.aivencloud.com:21292/defaultdb?ssl-mode=REQUIRED"
+  url      = env("mysql://avnadmin:AVNS_I9xn8ax55ABtc_cXJAJ@mysql123-qasim202-0b29.i.aivencloud.com:21292/defaultdb?ssl-mode=REQUIRED")
 }
 
 generator client {
