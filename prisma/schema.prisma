@@ -1,7 +1,13 @@
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://avnadmin:AVNS_I9xn8ax55ABtc_cXJAJ@mysql123-qasim202-0b29.i.aivencloud.com:21292/defaultdb?ssl-mode=REQUIRED"
+  config   = {
+    ssl: {
+      ca: '/ca.pem', // Path to the CA certificate downloaded from Aiven
+    }
+  }
 }
+
 
 generator client {
   provider = "prisma-client-js"
