@@ -1,17 +1,17 @@
 datasource db {
   provider = "mysql"
-  url      = "mysql://avnadmin:AVNS_I9xn8ax55ABtc_cXJAJ@mysql123-qasim202-0b29.i.aivencloud.com:21292/defaultdb?ssl-mode=REQUIRED"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
-  
+
 model Referral {
   id            Int      @id @default(autoincrement())
   referrerName  String
   referrerEmail String
   refereeName   String
   refereeEmail  String
-  createdAt     DateTime  
+  createdAt     DateTime 
 }
