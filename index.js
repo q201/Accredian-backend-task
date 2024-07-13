@@ -26,9 +26,11 @@ const referralValidation = [
   body('refereeEmail').isEmail().withMessage('Invalid referee email.'),
 ];
 
-app.get('/getAll', (req, res, next) => {
-  console.log("its console.. ", process.env.EMAIL);
-  res.send("Its a get end point---");
+app.get('/getAll', async (req, res, next) => {
+  
+  const allRecords = await prisma.referral.findMany();
+
+  res.json(allRecords);
 });
 
  
